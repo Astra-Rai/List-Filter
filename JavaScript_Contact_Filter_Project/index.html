@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Contact Fiter</title>
+</head>
+<body>
+   <div class="container">
+    <h1>
+        My Contacts
+    </h1>
+    <input type="text" id="filterInput" placeholder="Search name...">
+    <!--can a list be within a list, or does it have to be ul and li -->
+    <ul id="names" class="collection with-header">
+        <li class="collection-header">           
+            <h5>A</h5>
+        </li>
+            <li class="collection-item">
+                <a href="#">Abe</a>
+            </li>
+            <li class="collection-item">
+                <a href="#">Adam</a>
+            </li>
+            <li class="collection-item">
+                    <a href="#">Allen</a>
+            </li>   
+    </ul>
+   </div>    
+<script>
+    
+        //To target text entered in the input filed, first place elements with 'filterInput in a variable'
+        //Get input element
+
+    let filterInput = document.getElementById('filterInput');
+        //Test: Check if variable filter input is linked to correct element Id "filterInput"
+        //If text works properly, this will print to console.log(filterInput)...
+        //<input type="text" id="filterInput" placeholder="Search name...">
+        //console.log(filterInput);//Output: <input type="text" id="filterInput" placeholder="Search name...">
+        
+        //link filterInput variable, to an eventListern
+        //Remember: filterInputVariable containts input element id = "filterInput"
+    filterInput.addEventListener('keyup', filterNames);
+
+    function filterNames(){
+        //Test: Typed text into input field; string 'event for input listner works effectively' printed to console
+       // console.log('event for input listner works effectively');
+
+       //Step 1 of function: Get value of input
+       //Variable filterValue, use document getElementById, id = "filterInput"...
+       //link to value method, convert text to uppercase method...
+       //Is value a method
+       let filterValue = document.getElementById('filterInput').value.toUpperCase(); 
+        //Test: Type text in input field and see if it is prtint to console
+        //Typed: love in lowercase lettters
+        //Note: the toUpperCaseMethod will allow the contacts that have an Uppercase first character to be detected in the contact list
+        //line above, i need to have a better understanding of this...
+       //console.log(filterValue); //Output: LOVE
+
+    let ul = document.getElementById('names');
+
+    //querySelectorAll, creats a array out of a all <li> 
+    let li = ul.querySelectorAll('li.collection-item');
+    
+    for(let i =0; i<li.length; i++){
+        //a tags are within <li>....
+        let a = li[i].getElementsByTagName('a')[0];
+        //consistency with toUpperCase()method
+        if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1){
+            //if there isn't a clear match for the current element, css property...
+            li[i].style.display ='';
+        } else {
+            //if there isn't a clear match for the current element, css property...
+            li[i].style.display = 'none';
+        }
+        }
+    }
+</script>
+</body>
+</html>
